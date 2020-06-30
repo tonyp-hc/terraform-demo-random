@@ -1,16 +1,8 @@
-resource "random_id" "random" {
-  keepers = {
-    uuid = "${uuid()}"
-  }
-  byte_length = 8
+module "kubeadm-token" {
+  source  = "app.terraform.io/TonyPulickal/kubeadm-token/random"
+  version = "1.1.0"
 }
 
-output "random" {
-  value = "${random_id.random.hex}"
+output "new_token" {
+  value = module.kubeadm-token.token
 }
-
-output "random_id" {
-  value = "${random_id.random.id}"
-}
-
-
